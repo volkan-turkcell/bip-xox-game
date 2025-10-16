@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 
 /** BiP Renkleri:
  *  Mavi:   #03A9F4
@@ -114,11 +114,14 @@ export default function Game() {
   // ✅ Oyun bitti mi? (kazanan veya berabere)
   const isGameOver = !!winner || isDraw;
 
-  function handlePlay(nextSquares) {
-    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
-    setHistory(nextHistory);
-    setCurrentMove(nextHistory.length - 1);
-  }
+  const handlePlay = useCallback(
+    (nextSquares) => {
+      const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+      setHistory(nextHistory);
+      setCurrentMove(nextHistory.length - 1);
+    },
+    [history, currentMove]
+  );
 
   function handleReset(toMode = gameMode) {
     setHistory([Array(9).fill(null)]);
