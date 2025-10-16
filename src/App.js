@@ -144,9 +144,9 @@ export default function Game() {
       next[randomIndex] = 'O';
       setIsBotThinking(false);
       handlePlay(next);
-    }, 400);
+    }, 1000);
     return () => clearTimeout(delay);
-  }, [gameMode, xIsNext, currentSquares, winner, isDraw]);
+  }, [gameMode, xIsNext, currentSquares, winner, isDraw, handlePlay]);
 
   // ✅ Board’u ne zaman kilitleyelim?
   // - oyun bittiğinde (kazanan veya berabere)
